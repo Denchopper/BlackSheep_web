@@ -44,7 +44,7 @@ class Beer(models.Model):
     beer_style = models.ForeignKey(BeerStyle, on_delete=models.CASCADE)  # 'Стиль'
     name = models.CharField(default=" ", max_length=30)
     description = models.TextField()
-    abv = models.PositiveSmallIntegerField()  # 'ABV (Відсоток алкоголю)'
+    abv = models.DecimalField(max_digits=3, decimal_places=1)  # 'ABV (Відсоток алкоголю)'
     og = models.PositiveSmallIntegerField()  # 'OG (Щільність)'
     ibu = models.PositiveSmallIntegerField()  # 'IBU (Гіркота)'
     volume = models.ManyToManyField(BeerVolume, through="Options")
@@ -57,5 +57,3 @@ class Options(models.Model):  # Варіації пива та об'єму
     beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
     volume = models.ForeignKey(BeerVolume, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
-
-

@@ -2,7 +2,7 @@ from django.db import models
 
 
 class BeerType(models.Model):  # Пиво: розливне|пляшкове
-    name = models.CharField(max_length=50)  # "Тип пива"
+    name = models.CharField(max_length=50, null=True)  # "Тип пива"
     description = models.TextField()  # "Опис"
 
     def __str__(self):
@@ -10,7 +10,7 @@ class BeerType(models.Model):  # Пиво: розливне|пляшкове
 
 
 class Brewery(models.Model):  # Броварні
-    name = models.CharField(max_length=50)  # 'Назва броварні'
+    name = models.CharField(max_length=50, null=True)  # 'Назва броварні'
     description = models.TextField()  # 'Опис броварні'
 
     def __str__(self):
@@ -25,24 +25,24 @@ class BeerVolume(models.Model):
 
 
 class BeerStyle(models.Model):  # Стиль пива: IPA/Stout|etc.
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.name
 
 
 class SnackType(models.Model):  # Тип закуски: холодна|гаряча
-    name = models.CharField(max_length=50)
-    description = models.TextField()
+    name = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.name
 
 
 class Beer(models.Model):
-    brewery = models.ForeignKey(Brewery, on_delete=models.CASCADE)
-    beer_style = models.ForeignKey(BeerStyle, on_delete=models.CASCADE)  # 'Стиль'
-    name = models.CharField(default=" ", max_length=30)
+    brewery = models.ForeignKey(Brewery, on_delete=models.SET_NULL, null=True)
+    beer_type = models.ForeignKey(BeerType, on_delete=models.SET_NULL, null=True)
+    beer_style = models.ForeignKey(BeerStyle, on_delete=models.SET_NULL, null=True)  # 'Стиль'
+    name = models.CharField(default="", max_length=30)
     description = models.TextField()
     abv = models.DecimalField(max_digits=3, decimal_places=1)  # 'ABV (Відсоток алкоголю)'
     og = models.PositiveSmallIntegerField()  # 'OG (Щільність)'
@@ -57,3 +57,10 @@ class Options(models.Model):  # Варіації пива та об'єму
     beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
     volume = models.ForeignKey(BeerVolume, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
+
+
+class Snack(models.Model):
+    name = models.CharField(max_length=255)
+    type = models.ForeignKey(SnackType, on_delete=models.SET_NULL, null=True)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)

@@ -1,9 +1,14 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class BeerType(models.Model):  # Пиво: розливне|пляшкове
     name = models.CharField(max_length=50, null=True)  # "Тип пива"
-    description = models.TextField()  # "Опис"
+    slug = models.SlugField(unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(BeerType, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -12,6 +17,11 @@ class BeerType(models.Model):  # Пиво: розливне|пляшкове
 class Brewery(models.Model):  # Броварні
     name = models.CharField(max_length=50, null=True)  # 'Назва броварні'
     description = models.TextField()  # 'Опис броварні'
+    slug = models.SlugField(unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Brewery, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -26,6 +36,11 @@ class BeerVolume(models.Model):
 
 class BeerStyle(models.Model):  # Стиль пива: IPA/Stout|etc.
     name = models.CharField(max_length=50, null=True)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(BeerStyle, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -33,6 +48,11 @@ class BeerStyle(models.Model):  # Стиль пива: IPA/Stout|etc.
 
 class SnackType(models.Model):  # Тип закуски: холодна|гаряча
     name = models.CharField(max_length=50, null=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(SnackType, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

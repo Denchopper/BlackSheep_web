@@ -75,15 +75,6 @@ class Beer(models.Model):
         return self.name
 
 
-"""class Options(models.Model):  # Варіації пива та об'єму
-    beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
-    volume = models.ForeignKey(BeerVolume, on_delete=models.CASCADE)
-    price = models.PositiveSmallIntegerField()
-
-    class Meta:
-        unique_together = [['beer', 'volume']]"""
-
-
 class Snack(models.Model):
     name = models.CharField(max_length=255)
     type = models.ForeignKey(SnackType, on_delete=models.SET_NULL, null=True)

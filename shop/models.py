@@ -70,6 +70,11 @@ class Beer(models.Model):
     volume = models.ManyToManyField(BeerVolume)
     price_per_05 = models.PositiveSmallIntegerField(default='0')
     available = models.BooleanField(default=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.beer_style)
+        super(Beer, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

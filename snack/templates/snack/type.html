@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10">
+    {% for snack in snack %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Name: {{ snack.name }}
+        </div>
+        <div class="card-body">
+             <p class="card-title">type: {{ snack.type}}</p>
+                <p class="card-text">{{ snack.description }}</p>
+                <h6 class="card-title">Price per 100g: {{ snack.price_per_100g }}</h6>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

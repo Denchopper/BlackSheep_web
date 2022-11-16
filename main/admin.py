@@ -11,3 +11,7 @@ class SportTypeAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ['title', 'type', 'date']
     list_filter = ['type']
+
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    pass

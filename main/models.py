@@ -20,3 +20,13 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     date = models.DateTimeField()
     photo = models.ImageField(upload_to='photos/%Y/%m/', blank=True, null=True)
+
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=30)
+    phone_number = models.IntegerField()
+    e_mail = models.EmailField()
+    text = models.TextField()
+
+    def __str__(self):
+        return self.name

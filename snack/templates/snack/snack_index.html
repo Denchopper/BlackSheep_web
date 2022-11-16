@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container my-2">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 ">
+            {% for snack in snack %}
+            <div class="col">
+                <div class="card my-2">
+                    {% if snack.photo %}
+                    <img src="{{snack.photo.url}}" class="rounded-img" class="card-img-top" alt="Photo">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{snack.name}}</h5>
+                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus perferendis porro explicabo dicta voluptate excepturi mollitia odio consequuntur. Praesentium, in.</p>
+                        <div class="container">
+                            <div class="card-footer text-center">
+                                {{snack.price_per_100g}} hrn.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

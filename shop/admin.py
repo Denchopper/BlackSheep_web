@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BeerType, Brewery, BeerStyle, SnackType, Beer, BeerVolume, Snack
+from .models import BeerType, Brewery, BeerStyle, Beer, BeerVolume
 
 
 @admin.register(BeerType)
@@ -17,11 +17,6 @@ class BeerStyleAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SnackType)
-class SnackTypeAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Beer)
 class BeerAdmin(admin.ModelAdmin):
     list_display = ['name', 'brewery', 'beer_style', 'beer_type', 'price_per_05', 'available']
@@ -33,9 +28,3 @@ class BeerAdmin(admin.ModelAdmin):
 @admin.register(BeerVolume)
 class BeerVolumeAdmin(admin.ModelAdmin):
     pass
-
-
-@admin.register(Snack)
-class SnackAdmin(admin.ModelAdmin):
-    list_display = ['name', 'type', 'price_per_100g', 'available']
-    list_editable = ['price_per_100g', 'available']
